@@ -1,0 +1,12 @@
+[package]
+name = "finio"
+version = "0.1.0"
+edition = "2021"
+description = "CLI для конвертации финансовых данных (CSV, XML, MT940, CAMT.053)."
+license = "MIT"
+
+[dependencies]
+finiolib = { path = "../finiolib", version = "0.1.0" }
+clap = { workspace = true }
+strum = { workspace = true }
+serde = { workspace = true }

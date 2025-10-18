@@ -1,0 +1,21 @@
+[workspace]
+members = ["finiolib", "finio"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+
+[workspace.dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+csv = "1"
+quick-xml = { version = "0.31", features = ["serialize"] }
+thiserror = "1"
+chrono = { version = "0.4", features = ["serde"] }
+rust_decimal = { version = "1", features = ["serde", "serde-with-str"] }
+rust_decimal_macros = "1"
+regex = "1"
+itertools = "0.13"
+clap = { version = "4", features = ["derive"] }
+strum = { version = "0.26", features = ["derive"] }

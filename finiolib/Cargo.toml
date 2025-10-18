@@ -1,0 +1,18 @@
+[package]
+name = "finiolib"
+version = "0.1.0"
+edition = "2021"
+description = "Parser/serializer for financial statements (CSV, XML, MT940, CAMT.053)."
+license = "MIT"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+csv = { workspace = true }
+quick-xml = { workspace = true }
+thiserror = { workspace = true }
+chrono = { workspace = true }
+rust_decimal = { workspace = true }
+rust_decimal_macros = { workspace = true }
+regex = { workspace = true }
+itertools = { workspace = true }
