@@ -41,17 +41,24 @@ impl crate::traits::ReadFormat for Mt940 {
                     .captures(&line)
                     .ok_or_else(|| FinioError::Parse("bad :61:".into()))?;
 
-                let val = caps.name("val").unwrap().as_str();
+                // маленький хелпер для обязательных групп
+                let req = |name: &str| {
+                    caps.name(name)
+                        .map(|m| m.as_str())
+                        .ok_or_else(|| FinioError::Parse(format!(":61: missing {name}")))
+                };
+
+                let val = req("val")?;
                 let book_opt = caps.name("book").map(|m| m.as_str());
 
-                let dc = match caps.name("dc").unwrap().as_str() {
+                let dc = match req("dc")? {
                     "C" => DebitCredit::Credit,
                     "D" => DebitCredit::Debit,
                     other => return Err(FinioError::Parse(format!(":61: dc {other}"))),
                 };
 
                 // сумма (в :61: — без валюты)
-                let amt = caps.name("amt").unwrap().as_str().replace(',', ".");
+                let amt = req("amt")?.replace(',', ".");
                 let amount: Decimal = amt
                     .parse()
                     .map_err(|e| FinioError::Parse(format!("amount: {e}")))?;

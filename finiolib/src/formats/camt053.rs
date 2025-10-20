@@ -225,8 +225,10 @@ impl ReadFormat for Camt053 {
                         b"AddtlNtryInf" => in_addtl = true,
                         b"NtryRef" => in_ntry_ref = true,
                         b"Ntry" => {
+                            let booking_date = NaiveDate::from_ymd_opt(1970, 1, 1)
+                                .ok_or_else(|| FinioError::Parse("invalid default booking date 1970-01-01".into()))?;
                             pending = Some(Entry {
-                                booking_date: NaiveDate::from_ymd_opt(1970, 1, 1).unwrap(),
+                                booking_date,
                                 value_date: None,
                                 amount: Decimal::ZERO,
                                 currency: "XXX".into(),
